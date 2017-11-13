@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  db:
+    image: mysql:latest
+    volumes:
+      - $PWD/docker/mysql/db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: oauth
+      MYSQL_USER: oauth
+      MYSQL_PASSWORD: oauth1234
