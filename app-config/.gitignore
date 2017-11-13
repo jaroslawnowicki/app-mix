@@ -23,4 +23,5 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-/docker
+docker/
+docker/mysql/**
