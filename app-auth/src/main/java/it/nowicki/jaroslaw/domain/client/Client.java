@@ -9,133 +9,133 @@ import java.util.Set;
 
 public class Client {
 
-    private String getClientId;
+    private String clientId;
 
-    private Set<String> getResourceIds;
+    private Set<String> resourceIds;
 
-    private boolean isSecretRequired;
+    private boolean secretRequired;
 
-    private String getClientSecret;
+    private String clientSecret;
 
-    private boolean isScoped;
+    private boolean scoped;
 
-    private Set<String> getScope;
+    private Set<String> scope;
 
-    private Set<String> getAuthorizedGrantTypes;
+    private Set<String> authorizedGrantTypes;
 
-    private Set<String> getRegisteredRedirectUri;
+    private Set<String> registeredRedirectUri;
 
-    private Collection<GrantedAuthority> getAuthorities;
+    private Collection<GrantedAuthority> authorities;
 
-    private Integer getAccessTokenValiditySeconds;
+    private Integer accessTokenValiditySeconds;
 
-    private Integer getRefreshTokenValiditySeconds;
+    private Integer refreshTokenValiditySeconds;
 
-    private boolean isAutoApprove;
+    private boolean autoApprove;
 
-    private Map<String, Object> getAdditionalInformation;
+    private Map<String, Object> additionalInformation;
 
-    public String getGetClientId() {
-        return getClientId;
+    public String getClientId() {
+        return clientId;
     }
 
-    public void setGetClientId(String getClientId) {
-        this.getClientId = getClientId;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
-    public Set<String> getGetResourceIds() {
-        return getResourceIds;
+    public Set<String> getResourceIds() {
+        return resourceIds;
     }
 
-    public void setGetResourceIds(Set<String> getResourceIds) {
-        this.getResourceIds = getResourceIds;
+    public void setResourceIds(Set<String> resourceIds) {
+        this.resourceIds = resourceIds;
     }
 
     public boolean isSecretRequired() {
-        return isSecretRequired;
+        return secretRequired;
     }
 
     public void setSecretRequired(boolean secretRequired) {
-        isSecretRequired = secretRequired;
+        this.secretRequired = secretRequired;
     }
 
-    public String getGetClientSecret() {
-        return getClientSecret;
+    public String getClientSecret() {
+        return clientSecret;
     }
 
-    public void setGetClientSecret(String getClientSecret) {
-        this.getClientSecret = getClientSecret;
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
     }
 
     public boolean isScoped() {
-        return isScoped;
+        return scoped;
     }
 
     public void setScoped(boolean scoped) {
-        isScoped = scoped;
+        this.scoped = scoped;
     }
 
-    public Set<String> getGetScope() {
-        return getScope;
+    public Set<String> getScope() {
+        return scope;
     }
 
-    public void setGetScope(Set<String> getScope) {
-        this.getScope = getScope;
+    public void setScope(Set<String> scope) {
+        this.scope = scope;
     }
 
-    public Set<String> getGetAuthorizedGrantTypes() {
-        return getAuthorizedGrantTypes;
+    public Set<String> getAuthorizedGrantTypes() {
+        return authorizedGrantTypes;
     }
 
-    public void setGetAuthorizedGrantTypes(Set<String> getAuthorizedGrantTypes) {
-        this.getAuthorizedGrantTypes = getAuthorizedGrantTypes;
+    public void setAuthorizedGrantTypes(Set<String> authorizedGrantTypes) {
+        this.authorizedGrantTypes = authorizedGrantTypes;
     }
 
-    public Set<String> getGetRegisteredRedirectUri() {
-        return getRegisteredRedirectUri;
+    public Set<String> getRegisteredRedirectUri() {
+        return registeredRedirectUri;
     }
 
-    public void setGetRegisteredRedirectUri(Set<String> getRegisteredRedirectUri) {
-        this.getRegisteredRedirectUri = getRegisteredRedirectUri;
+    public void setRegisteredRedirectUri(Set<String> registeredRedirectUri) {
+        this.registeredRedirectUri = registeredRedirectUri;
     }
 
-    public Collection<GrantedAuthority> getGetAuthorities() {
-        return getAuthorities;
+    public Collection<GrantedAuthority> getAuthorities() {
+        return authorities;
     }
 
-    public void setGetAuthorities(Collection<GrantedAuthority> getAuthorities) {
-        this.getAuthorities = getAuthorities;
+    public void setAuthorities(Collection<GrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 
-    public Integer getGetAccessTokenValiditySeconds() {
-        return getAccessTokenValiditySeconds;
+    public Integer getAccessTokenValiditySeconds() {
+        return accessTokenValiditySeconds;
     }
 
-    public void setGetAccessTokenValiditySeconds(Integer getAccessTokenValiditySeconds) {
-        this.getAccessTokenValiditySeconds = getAccessTokenValiditySeconds;
+    public void setAccessTokenValiditySeconds(Integer accessTokenValiditySeconds) {
+        this.accessTokenValiditySeconds = accessTokenValiditySeconds;
     }
 
-    public Integer getGetRefreshTokenValiditySeconds() {
-        return getRefreshTokenValiditySeconds;
+    public Integer getRefreshTokenValiditySeconds() {
+        return refreshTokenValiditySeconds;
     }
 
-    public void setGetRefreshTokenValiditySeconds(Integer getRefreshTokenValiditySeconds) {
-        this.getRefreshTokenValiditySeconds = getRefreshTokenValiditySeconds;
+    public void setRefreshTokenValiditySeconds(Integer refreshTokenValiditySeconds) {
+        this.refreshTokenValiditySeconds = refreshTokenValiditySeconds;
     }
 
     public boolean isAutoApprove() {
-        return isAutoApprove;
+        return autoApprove;
     }
 
     public void setAutoApprove(boolean autoApprove) {
-        isAutoApprove = autoApprove;
+        this.autoApprove = autoApprove;
     }
 
-    public Map<String, Object> getGetAdditionalInformation() {
-        return getAdditionalInformation;
+    public Map<String, Object> getAdditionalInformation() {
+        return additionalInformation;
     }
 
-    public void setGetAdditionalInformation(Map<String, Object> getAdditionalInformation) {
-        this.getAdditionalInformation = getAdditionalInformation;
+    public void setAdditionalInformation(Map<String, Object> additionalInformation) {
+        this.additionalInformation = additionalInformation;
     }
 }

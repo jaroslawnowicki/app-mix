@@ -1,1 +1,6 @@
 generate jks
+
+curl -X POST --user 'gigy:secret' -d 'grant_type=password&username=peter@example.com&password=password' http://localhost:8000/gigy/oauth/token
+
+curl acme:acmesecret@localhost:9100/oauth/token -d grant_type=client_credentials
+curl acme:secret@localhost:9100/oauth/token -d "grant_type=password&username=jarek&password=1234"

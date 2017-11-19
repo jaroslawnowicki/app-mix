@@ -11,3 +11,15 @@ services:
       MYSQL_DATABASE: oauth
       MYSQL_USER: oauth
       MYSQL_PASSWORD: oauth1234
+  mongorep_1:
+    image: mongo:latest
+    container_name: "mongorep_1"
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - $PWD/docker/mongo/mongorep1/data/:/data/db
+    ports:
+      - 27017:27017
+    hostname: 192.168.0.20
+    command: mongod --replSet mon --smallfiles --logpath=/dev/null

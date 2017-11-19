@@ -22,4 +22,9 @@ public class MongoUserRepository implements UserRepository {
     public User findOneByUsername(String username) {
         return userDAOMapper.map(userDAO.findOneByUsername(username));
     }
+
+    @Override
+    public User createUser(User user) {
+        return userDAOMapper.map(userDAO.save(userDAOMapper.map(user)));
+    }
 }
