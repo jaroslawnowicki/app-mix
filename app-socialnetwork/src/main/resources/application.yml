@@ -1,0 +1,15 @@
+spring:
+  data:
+    neo4j:
+      username: neo4j
+      password: password
+      uri: http://localhost:7474
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+storage:
+  media: test
