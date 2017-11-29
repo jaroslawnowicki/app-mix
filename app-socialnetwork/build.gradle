@@ -2,10 +2,17 @@ buildscript {
     ext.kotlin_version = '1.1.2-5'
     ext {
         kotlinVersion = '1.1.2-5'
-        springBootVersion = '1.5.4.RELEASE'
+        springBootVersion = '1.5.6.RELEASE'
+        dependencyManagementPluginVersion = '1.0.3.RELEASE'
     }
     repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        jcenter()
+        mavenLocal()
         mavenCentral()
+
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -13,16 +20,31 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:${dependencyManagementPluginVersion}")
+        classpath 'org.ajoberstar:gradle-jacoco:0.1.0'
+
     }
 }
 
+plugins {
+    id 'jacoco'
+}
+
+
 apply plugin: 'eclipse'
+apply plugin: 'maven'
 apply plugin: 'idea'
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-spring'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'application'
 apply plugin: 'groovy'
+apply plugin: 'pmd'
+apply plugin: "jacoco"
+apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
+
+
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
@@ -88,3 +110,68 @@ dependencies {
 }
 
 
+jacoco {
+    toolVersion = "0.7.9"
+    applyTo run
+}
+
+jacocoTestReport {
+    reports {
+        csv.enabled false
+        xml.enabled false
+        html.destination file("${buildDir}/reports/socialnetwork")
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0
+            }
+        }
+
+        rule {
+            includes = ['it.nowicki.jaroslaw.socialnetwork.**']
+            excludes = ['it.nowicki.jaroslaw.socialnetwork.*.*Application*']
+            enabled = true
+            element = 'BUNDLE'
+
+            limit {
+                counter = 'CLASS'
+                value = 'MISSEDCOUNT'
+                maximum = 0
+            }
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0
+            }
+            limit {
+                counter = 'COMPLEXITY'
+                value = 'COVEREDRATIO'
+                minimum = 0
+
+            }
+            limit {
+                counter = 'METHOD'
+                value = 'COVEREDRATIO'
+                minimum = 0
+            }
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
+
+test {
+    jacoco {
+        append = false
+        destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
+        classDumpDir = file("$buildDir/jacoco/classpathdumps")
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.2'
+}

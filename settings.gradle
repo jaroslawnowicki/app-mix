@@ -1,0 +1,2 @@
+rootProject.name = 'app-mix'
+include "app-config", "app-auth", "app-kibana", "app-socialnetwork"
