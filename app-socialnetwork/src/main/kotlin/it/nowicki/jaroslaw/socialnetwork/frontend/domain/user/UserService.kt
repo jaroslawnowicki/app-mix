@@ -1,7 +1,6 @@
 package it.nowicki.jaroslaw.socialnetwork.frontend.domain.user
 
 import it.nowicki.jaroslaw.socialnetwork.frontend.domain.exception.*
-import lombok.extern.slf4j.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -11,7 +10,6 @@ import java.util.*
  * Created by jarek on 15.06.17.
  */
 @Service
-@Slf4j
 class UserService @Autowired constructor(val userRepository: UserRepository) {
 
     fun create(user: User): User? {

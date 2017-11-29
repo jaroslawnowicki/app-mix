@@ -2,8 +2,9 @@ buildscript {
     ext.kotlin_version = '1.1.2-5'
     ext {
         kotlinVersion = '1.1.2-5'
-        springBootVersion = '1.5.6.RELEASE'
+        springBootVersion = '1.5.8.RELEASE'
         dependencyManagementPluginVersion = '1.0.3.RELEASE'
+        keycloakVersion= "3.1.0.Final"
     }
     repositories {
         maven {
@@ -41,8 +42,8 @@ apply plugin: 'application'
 apply plugin: 'groovy'
 apply plugin: 'pmd'
 apply plugin: "jacoco"
-apply plugin: 'java'
-apply plugin: 'io.spring.dependency-management'
+//apply plugin: 'java'
+//apply plugin: 'io.spring.dependency-management'
 
 
 
@@ -83,7 +84,7 @@ dependencies {
     compile('com.fasterxml.jackson.module:jackson-module-kotlin:2.7.3')
     compile("org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}")
     compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
-    compile('org.projectlombok:lombok')
+//    compile('org.projectlombok:lombok')
     compile('io.springfox:springfox-swagger2:2.7.0')
     compile('io.springfox:springfox-swagger-ui:2.7.0')
     compile('org.springframework.boot:spring-boot-starter-test')
@@ -92,6 +93,7 @@ dependencies {
     compile 'org.neo4j:neo4j:3.1.2'
     compile 'org.codehaus.groovy:groovy-all:2.4.7'
     compile 'io.arivera.oss:embedded-rabbitmq:1.1.2'
+    compile "org.keycloak:keycloak-spring-boot-starter:$keycloakVersion"
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
@@ -172,6 +174,6 @@ test {
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.2'
-}
+//task wrapper(type: Wrapper) {
+//    gradleVersion = '4.2'
+//}

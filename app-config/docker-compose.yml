@@ -34,12 +34,13 @@ services:
     image: jboss/keycloak
     environment:
       - KEYCLOAK_LOGLEVEL=DEBUG
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=password
     links:
       - dbpostgres:postgres
     ports:
       - "8089:8080"
       - "9999:9990"
-      - "443:8443"
     volumes:
       - $PWD/docker/keycl
   neo4j:
