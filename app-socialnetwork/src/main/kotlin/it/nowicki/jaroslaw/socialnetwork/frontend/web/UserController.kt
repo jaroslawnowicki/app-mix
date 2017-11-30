@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/user")
 class UserController @Autowired constructor(val userService: UserService, val userInfo: UserInfo, val userRequestHandler: UserRequestHandler) {
 
-    @GetMapping(value = "")
-    fun get(): User? = userService.getByUserId(userInfo.principal().username)
+    @GetMapping(value = "/")
+    fun get(): User? {
+        println(userInfo.email())
+        return userService.getByUserId(userInfo.email())
+    }
 
     @PostMapping("")
     fun create(@RequestBody user: UserRequestHandler.Request): OkResponse {
@@ -45,4 +48,5 @@ class UserController @Autowired constructor(val userService: UserService, val us
 
     @GetMapping("/search/{text}")
     fun search(@PathVariable text: String): Set<User?> = userService.search(text)
+
 }

@@ -11,9 +11,9 @@ services:
       MYSQL_DATABASE: oauth
       MYSQL_USER: oauth
       MYSQL_PASSWORD: oauth1234
-  mongorep_1:
+  mongorep_2:
     image: mongo:latest
-    container_name: "mongorep_1"
+    container_name: "mongorep_2"
     environment:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/dev/null
@@ -46,8 +46,8 @@ services:
   neo4j:
     image: neo4j:3.0
     ports:
-    - "7474:7474"
-    - "7687:7687"
+      - "7474:7474"
+      - "7687:7687"
     volumes:
       - $PWD/docker/neo4j/db/dbms:/data/dbms
   rabbit:

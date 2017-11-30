@@ -1,13 +1,14 @@
 package it.nowicki.jaroslaw.socialnetwork.frontend.infrastructure.security
 
 
+import org.keycloak.KeycloakSecurityContext
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver
 import org.keycloak.adapters.springsecurity.KeycloakSecurityComponents
 import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter
+import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken
+import org.keycloak.representations.AccessToken
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.ComponentScan
-import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.*
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -15,7 +16,11 @@ import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper
 import org.springframework.security.core.session.SessionRegistryImpl
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy
+import org.springframework.web.context.WebApplicationContext
+import org.springframework.web.context.request.RequestContextHolder
+import org.springframework.web.context.request.ServletRequestAttributes
 import java.lang.Exception
+import javax.servlet.http.HttpServletRequest
 
 
 @Configuration
@@ -27,11 +32,12 @@ class SpringSecurityConfig : KeycloakWebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         super.configure(http)
         http.authorizeRequests()
-                .antMatchers("/user*")
-                .hasRole("user")
+                .antMatchers("/user/*")
+                .hasRole("R_USER")
                 .anyRequest()
                 .permitAll()
     }
+
     @Autowired
     @Throws(Exception::class)
     fun configureGlobal(
@@ -54,13 +60,20 @@ class SpringSecurityConfig : KeycloakWebSecurityConfigurerAdapter() {
                 SessionRegistryImpl())
     }
 
-//    @Autowired
-//    @Throws(Exception::class)
-//    fun configureGlobal(auth: AuthenticationManagerBuilder) {
-//
-//        auth.inMemoryAuthentication()
-//                .withUser("user").password("password").roles("USER")
-//                .and()
-//                .withUser("admin").password("password").roles("ADMIN")
-//    }
+    @Bean
+    @Scope(scopeName = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
+    fun getAccessToken(): AccessToken {
+        return (getRequest().getUserPrincipal() as KeycloakAuthenticationToken).account.keycloakSecurityContext.token
+    }
+
+    @Bean
+    @Scope(scopeName = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
+    fun getKeycloakSecurityContext(): KeycloakSecurityContext {
+        return (getRequest().getUserPrincipal() as KeycloakAuthenticationToken).account.keycloakSecurityContext
+    }
+
+    private fun getRequest(): HttpServletRequest {
+        return (RequestContextHolder.currentRequestAttributes() as ServletRequestAttributes).getRequest()
+    }
+
 }

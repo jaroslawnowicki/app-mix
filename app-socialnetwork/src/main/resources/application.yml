@@ -5,7 +5,6 @@ spring:
       password: password
       uri: http://localhost:7474
 
-
   rabbitmq:
     host: 127.0.0.1
     port: 5672
@@ -20,7 +19,9 @@ keycloak:
   realm: social-network
   resource: social-network
   public-client: true
+  principal-attribute: fullName
+  enable-basic-auth: true
   security-constraints[0]:
-    authRoles[0]: user
+    authRoles[0]: R_USER
     securityCollections[0]:
       patterns[0]: /user/
