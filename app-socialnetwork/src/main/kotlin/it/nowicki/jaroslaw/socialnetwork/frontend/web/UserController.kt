@@ -7,6 +7,7 @@ import it.nowicki.jaroslaw.socialnetwork.frontend.domain.user.User
 import it.nowicki.jaroslaw.socialnetwork.frontend.domain.user.UserService
 import it.nowicki.jaroslaw.socialnetwork.frontend.infrastructure.security.UserInfo
 import it.nowicki.jaroslaw.socialnetwork.frontend.web.handler.UserRequestHandler
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
@@ -14,9 +15,13 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/user")
 class UserController @Autowired constructor(val userService: UserService, val userInfo: UserInfo, val userRequestHandler: UserRequestHandler) {
 
+    val log = LoggerFactory.getLogger(UserController::class.java)
+
     @GetMapping(value = "/")
     fun get(): User? {
+
         println(userInfo.email())
+        log.debug(userInfo.email())
         return userService.getByUserId(userInfo.email())
     }
 

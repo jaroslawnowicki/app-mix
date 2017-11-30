@@ -92,3 +92,22 @@ services:
       - elasticsearch
     environment:
       - ELASTICSEARCH_URL=http://172.17.0.1:9200
+  zookeeper:
+    image: wurstmeister/zookeeper:3.4.6
+    ports:
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka:0.10.2.1
+    links:
+      - zookeeper:zk
+    ports:
+      - 9092:9092
+    environment:
+      HOSTNAME_COMMAND: "getent hosts `hostname` | cut -d' ' -f1"
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_CREATE_TOPICS: "test:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: "zk:2181"
+    volumes:
+      - $PWD/docker/kafka/var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - zookeeper
