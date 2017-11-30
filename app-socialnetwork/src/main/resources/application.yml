@@ -15,13 +15,8 @@ spring:
     bootstrap-servers: localhost:9092
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-
 storage:
   media: test
-
-logging:
-  file: logs/application.log
-
 keycloak:
   auth-server-url: http://localhost:8089/auth
   realm: social-network
@@ -33,3 +28,5 @@ keycloak:
     authRoles[0]: R_USER
     securityCollections[0]:
       patterns[0]: /user/
+logging:
+  file: logs/application.log
