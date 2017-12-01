@@ -78,8 +78,8 @@ services:
     image: logstash:2.4.1-alpine
     command: logstash -f /etc/logstash/conf.d/logstash.conf
     volumes:
-      - $PWD/docker/logstash/logstash.conf:/etc/logstash/conf.d/logstash.conf
-      - $PWD/docker/logstash/logs/:/logs/
+      - $PWD/logstash.conf:/etc/logstash/conf.d/logstash.conf
+      - /var/log/app-mix/logs/:/logs/
     ports:
       - "5000:5000"
     links:

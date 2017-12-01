@@ -19,10 +19,14 @@ class UserController @Autowired constructor(val userService: UserService, val us
 
     @GetMapping(value = "/")
     fun get(): User? {
-
-        println(userInfo.email())
-        log.debug(userInfo.email())
-        return userService.getByUserId(userInfo.email())
+        try {
+            return userService.getByUserId(userInfo.email())
+        } catch (ex: UserNotFoundException) {
+            val user = User(null, userInfo.email(), false, null, userInfo.email(), userInfo.name(), userInfo.name(), null, null, null)
+            log.info("Create user {}", userInfo.email())
+            return userService.create(user)
+        }
+        return null
     }
 
     @PostMapping("")
