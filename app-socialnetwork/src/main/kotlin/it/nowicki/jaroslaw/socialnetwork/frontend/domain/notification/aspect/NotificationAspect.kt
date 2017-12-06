@@ -13,6 +13,13 @@ import org.springframework.stereotype.Component
 @Component
 class NotificationAspect @Autowired constructor(val notificationService: NotificationService) {
 
+    @AfterReturning("execution(* it.nowicki.jaroslaw.socialnetwork.frontend.domain.user.UserService.getByUserId(String)) && args(userId)")
+    @Throws(Throwable::class)
+    fun addInviteX(userId: String) {
+        println("dziala")
+        notificationService.addInvite(userId, "1")
+    }
+
     @AfterReturning("execution(* it.nowicki.jaroslaw.socialnetwork.frontend.domain.user.UserService.addInvite(String, String)) && args(userId, userInviteId)")
     @Throws(Throwable::class)
     fun addInvite(userId: String, userInviteId: String) {

@@ -11,5 +11,10 @@ class RabbitNotificationMessage @Autowired constructor(val amqpTemplate: AmqpTem
 
     val NOTIFICATION_QUEUE_NAME = "notification"
 
-    override fun send(notification: Notification) = amqpTemplate.convertAndSend(NOTIFICATION_QUEUE_NAME, notification)
+    override fun send(notification: Notification) {
+
+        println("rabbit send")
+        amqpTemplate.convertAndSend(NOTIFICATION_QUEUE_NAME, notification)
+    }
+
 }
