@@ -6,7 +6,7 @@ import org.springframework.integration.config.EnableIntegration
 
 
 @SpringBootApplication
-@EnableIntegration
+//@EnableIntegration
 open class SocialNetworkApplication {
 
     companion object {

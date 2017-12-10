@@ -3,6 +3,7 @@ package it.nowicki.jaroslaw.socialnetwork.frontend.infrastructure.kafka
 import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
+import it.nowicki.jaroslaw.socialnetwork.frontend.domain.notification.NotificationType
 
 /**
  * Created by jarek on 05.12.17.
@@ -17,7 +18,8 @@ class KryoInternalSerializer : com.esotericsoftware.kryo.Serializer<Notification
     }
 
     override fun read(kryo: Kryo?, input: Input?, type: Class<NotificationMessageReading>?): NotificationMessageReading {
-        return NotificationMessageReading()
+
+        return NotificationMessageReading(input?.readString(), NotificationType.COMMENT_NEW, input?.readLong())
     }
 
 }

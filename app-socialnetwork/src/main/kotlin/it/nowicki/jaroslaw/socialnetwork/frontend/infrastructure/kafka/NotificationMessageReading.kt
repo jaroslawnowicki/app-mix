@@ -4,4 +4,4 @@ import it.nowicki.jaroslaw.socialnetwork.frontend.domain.notification.Notificati
 import java.time.LocalDateTime
 
 
-class NotificationMessageReading constructor(val userId: String, val notificationType: NotificationType, val created: LocalDateTime)
+class NotificationMessageReading constructor(val userId: String?, val notificationType: NotificationType, val created: Long?)

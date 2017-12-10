@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest
 
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 @ComponentScan(basePackageClasses = arrayOf(KeycloakSecurityComponents::class))
 class SpringSecurityConfig : KeycloakWebSecurityConfigurerAdapter() {
 

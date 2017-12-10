@@ -44,7 +44,7 @@ class KafkaConfig {
         props.put(BOOTSTRAP_SERVERS_KEY, bootstrapServersValue)
         props.put(CLIENT_ID_KEY, clientId)
         props.put(KEY_SERIALIZER_KEY, StringSerializer::class.jvmName)
-//        props.put(VALUE_SERIALIZER_KEY, JsonSerializer)
+        props.put(VALUE_SERIALIZER_KEY, KryoReadingSerializer::class.jvmName )
         return props
     }
 }

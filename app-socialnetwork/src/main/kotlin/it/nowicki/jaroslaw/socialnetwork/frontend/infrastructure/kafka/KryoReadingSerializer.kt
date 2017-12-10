@@ -1,10 +1,12 @@
 package it.nowicki.jaroslaw.socialnetwork.frontend.infrastructure.kafka
 
 import com.esotericsoftware.kryo.Kryo
+import com.esotericsoftware.kryo.io.ByteBufferInput
 import com.esotericsoftware.kryo.io.ByteBufferOutput
 import org.apache.kafka.common.serialization.Deserializer
 import org.apache.kafka.common.serialization.Serializer
 import java.io.Closeable
+import kotlin.reflect.jvm.jvmName
 
 
 /**
@@ -22,20 +24,25 @@ class KryoReadingSerializer : Closeable, AutoCloseable, Serializer<NotificationM
 
     override fun serialize(topic: String?, data: NotificationMessageReading?): ByteArray {
         val output = ByteBufferOutput(100)
-        kryos.get().writeObject(output, sensorReading);
-        return output.toBytes();
+        kryos.get().writeObject(output, data)
+        return output.toBytes()
     }
 
     override fun deserialize(topic: String?, data: ByteArray?): NotificationMessageReading {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        try {
+            return kryos.get().readObject(ByteBufferInput(data), NotificationMessageReading::class.java)
+        }
+        catch( e: Exception) {
+            throw IllegalArgumentException("Error reading bytes",e);
+        }
     }
 
     override fun configure(configs: MutableMap<String, *>?, isKey: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun close() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
 }
