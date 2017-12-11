@@ -1,0 +1,50 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+#
+#GET   /swagger.json            controllers.ApiHelpController.getResources
+#GET   /docs/                   controllers.Application.redirectDocs
+##GET   /docs/*file              controllers.Assets.at(path="/public/swagger-ui",file)
+#
+#GET    /webjars/*file          controllers.WebJarAssets.at(file)
+#
+#
+## Home page
+#GET     /                           controllers.Application.index
+#GET     /dziala                     controllers.Application.index
+#
+##GET  /asset/*file               controllers.Assets.at(path="/public", file)
+#
+##GET /                           controllers.Assets.at(path="/public", file="index.html")
+#GET /assets/*file               controllers.Assets.at(path="/public", file)
+#
+#
+##Test
+#GET /res                            controllers.ResourceController.availableResources
+#POST /reservation                   controllers.ReservationController.reserveResource
+#
+#
+#GET /baza                           controllers.TestBaseController.test
+
+#GET     /                               controllers.Application.index
+#PUT     /tick                           controllers.Application.putGenTick
+#GET     /feed/tick                      controllers.Application.tickFeed
+#GET     /tick/last_offset               controllers.Application.getLastOffset
+#GET     /tick/messages/last/:count      controllers.Application.getLastMessages(count: Int)
+#GET     /tick/offset/reset/back/:back   controllers.Application.getResetOffset(back: Int)
+
+
+GET     /                           controllers.HomeController.index
+
+GET     /test                       controllers.HomeController.test
+
+GET     /numberstream               controllers.HomeController.numberStream
+
+GET     /kafkastream                controllers.HomeController.kafkaStream
+
+POST    /capitalize                 controllers.HomeController.capitalize
+
+
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+GET     /webjars/*file              controllers.WebJarAssets.at(file)
