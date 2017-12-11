@@ -4,22 +4,21 @@ import it.nowicki.jaroslaw.socialnetwork.frontend.domain.notification.Notificati
 import it.nowicki.jaroslaw.socialnetwork.frontend.domain.notification.NotificationMessage
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerRecord
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Primary
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Repository
 
-
-/**
- * Created by jarek on 04.12.17.
- */
 @Repository
-@Primary
 class KafkaNotificationMessage @Autowired constructor(val kafkaProducer: KafkaProducer<String, Notification>) : NotificationMessage {
 
-    private val NOTIFICATION_KAFKA: String = "test"
+    val log = LoggerFactory.getLogger(KafkaNotificationMessage::class.java)
+
+    @Value("\${config.kafka.topic}")
+    lateinit var NOTIFICATION_KAFKA: String
 
     override fun send(notification: Notification) {
-        println("kafka send")
+        log.info("Send message from Kafka")
         val record = ProducerRecord<String, Notification>(NOTIFICATION_KAFKA, notification)
         kafkaProducer.send(record)
     }

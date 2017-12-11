@@ -3,8 +3,8 @@ Apps mix
 
 Technologies in project: 
 - Spring Boot and Spring Cloud
-- keycloak
-- Apache Kafka
+- Keycloak
+- Apache Kafka (Kyro Serialize)
 - MongoDB
 - Neo4j
 - Spock 

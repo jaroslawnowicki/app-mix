@@ -21,6 +21,9 @@ config:
     serializer:
       key: org.apache.kafka.common.serialization.IntegerSerializer
       value: org.apache.kafka.common.serialization.StringSerializer
+    topic: test
+  rabbitmq:
+    queue: notification
 
 storage:
   media: test

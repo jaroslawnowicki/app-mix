@@ -3,13 +3,15 @@ package it.nowicki.jaroslaw.socialnetwork.frontend.infrastructure.rabbitmq
 import org.springframework.amqp.core.*
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter
 import org.springframework.amqp.support.converter.MessageConverter
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
 class RabbitConfig {
 
-    val NOTIFICATION_QUEUE_NAME = "notification"
+    @Value("\${config.rabbitmq.queue}")
+    lateinit var NOTIFICATION_QUEUE_NAME: String
 
     @Bean
     fun notificationQueue(): Queue = Queue(NOTIFICATION_QUEUE_NAME, false)

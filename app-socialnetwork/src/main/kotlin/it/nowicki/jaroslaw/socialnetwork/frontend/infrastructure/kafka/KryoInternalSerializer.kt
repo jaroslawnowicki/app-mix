@@ -5,21 +5,15 @@ import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import it.nowicki.jaroslaw.socialnetwork.frontend.domain.notification.NotificationType
 
-/**
- * Created by jarek on 05.12.17.
- */
 class KryoInternalSerializer : com.esotericsoftware.kryo.Serializer<NotificationMessageReading>() {
 
     override fun write(kryo: Kryo?, output: Output?, notificationMessageReading: NotificationMessageReading?) {
         output?.writeString(notificationMessageReading?.userId)
         output?.writeString(notificationMessageReading?.notificationType?.name)
-//        output?.writeInt(notificationMessageReading?.created.nano)
-
     }
 
-    override fun read(kryo: Kryo?, input: Input?, type: Class<NotificationMessageReading>?): NotificationMessageReading {
+    override fun read(kryo: Kryo?, input: Input?, type: Class<NotificationMessageReading>?): NotificationMessageReading =
+            NotificationMessageReading(input?.readString(), NotificationType.COMMENT_NEW, input?.readLong())
 
-        return NotificationMessageReading(input?.readString(), NotificationType.COMMENT_NEW, input?.readLong())
-    }
 
 }

@@ -2,17 +2,14 @@ package it.nowicki.jaroslaw.socialnetwork.frontend.infrastructure.kafka
 
 import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryo.io.ByteBufferInput
-import com.esotericsoftware.kryo.io.ByteBufferOutput
 import org.apache.kafka.common.serialization.Deserializer
 import org.apache.kafka.common.serialization.Serializer
+import java.io.ByteArrayOutputStream
 import java.io.Closeable
-import kotlin.reflect.jvm.jvmName
+import java.io.IOException
+import java.io.ObjectOutputStream
 
-
-/**
- * Created by jarek on 05.12.17.
- */
-class KryoReadingSerializer : Closeable, AutoCloseable, Serializer<NotificationMessageReading>, Deserializer<NotificationMessageReading> {
+class KryoReadingSerializer : Closeable, AutoCloseable, Serializer<Object>, Deserializer<NotificationMessageReading> {
 
     private val kryos = object : ThreadLocal<Kryo>() {
         override fun initialValue(): Kryo {
@@ -22,10 +19,18 @@ class KryoReadingSerializer : Closeable, AutoCloseable, Serializer<NotificationM
         }
     }
 
-    override fun serialize(topic: String?, data: NotificationMessageReading?): ByteArray {
-        val output = ByteBufferOutput(100)
-        kryos.get().writeObject(output, data)
-        return output.toBytes()
+    override fun serialize(topic: String?, data: Object?): ByteArray {
+        try {
+            val byteStream = ByteArrayOutputStream()
+            val objectStream = ObjectOutputStream(byteStream)
+            objectStream.writeObject(data)
+            objectStream.flush()
+            objectStream.close()
+            return byteStream.toByteArray()
+        } catch (e: IOException) {
+            throw IllegalStateException("Can't serialize object: " + data, e)
+        }
+
     }
 
     override fun deserialize(topic: String?, data: ByteArray?): NotificationMessageReading {
@@ -33,16 +38,12 @@ class KryoReadingSerializer : Closeable, AutoCloseable, Serializer<NotificationM
             return kryos.get().readObject(ByteBufferInput(data), NotificationMessageReading::class.java)
         }
         catch( e: Exception) {
-            throw IllegalArgumentException("Error reading bytes",e);
+            throw IllegalArgumentException("Error reading bytes", e)
         }
     }
 
-    override fun configure(configs: MutableMap<String, *>?, isKey: Boolean) {
+    override fun configure(configs: MutableMap<String, *>?, isKey: Boolean) {}
 
-    }
-
-    override fun close() {
-
-    }
+    override fun close() {}
 
 }
