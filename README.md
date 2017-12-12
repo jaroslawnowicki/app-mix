@@ -41,3 +41,6 @@ n stable
 ng new app-ui --routing
 cd app-ui
 ng serve 
+
+ng generate module apache-kafka --routing
+
