@@ -4,7 +4,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {HttpModule} from "@angular/http";
 import {FormsModule} from "@angular/forms";
 import {SocialNetworkRoutingModule} from "./social-network-routing.module";
-import {Ng2KeycloakModule} from "@ebondu/angular2-keycloak";
+import {KeycloakModule} from "@ebondu/angular2-keycloak";
 
 
 @NgModule({
@@ -14,7 +14,7 @@ import {Ng2KeycloakModule} from "@ebondu/angular2-keycloak";
     HttpModule,
     FormsModule,
     SocialNetworkRoutingModule,
-    Ng2KeycloakModule
+    KeycloakModule
   ],
   declarations: []
 })
