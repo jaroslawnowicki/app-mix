@@ -1,0 +1,122 @@
+#ELASTICSEARCH
+
+- status: http://localhost:9200/_cat/health?v, http://localhost:9200/_cat/nodes?v
+
+
+- list index: http://localhost:9200/_cat/indices?v
+
+
+- create index: PUT /customer?pretty
+
+
+- delete index: curl -XDELETE 'localhost:9200/customer?pretty&pretty'
+
+
+- search in field source: http://localhost:9200/logstash-2017.12.01/_search, GET /bank/_search?q=*&sort=account_number:asc&pretty
+
+
+curl -XGET 'localhost:9200/logstash-2017.12.01/_search?pretty' -H 'Content-Type: application/json' -d'
+{
+  "query": { "match_all": {} }
+}
+'
+
+- only one field (message):
+
+curl -XGET 'localhost:9200/logstash-2017.12.01/_search?pretty' -H 'Content-Type: application/json' -d'
+{
+  "query": { "match_all": {} },
+  "_source": ["message"]
+}
+'
+
+
+- search with match field:
+
+GET /bank/_search
+{
+  "query": { "match": { "account_number": 20 } }
+}
+
+
+- search ex: must, must_not, should
+
+GET /bank/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "age": "40" } }
+      ],
+      "must_not": [
+        { "match": { "state": "ID" } }
+      ]
+    }
+  }
+}
+
+-- filter
+
+
+GET /bank/_search
+{
+  "query": {
+    "bool": {
+      "must": { "match_all": {} },
+      "filter": {
+        "range": {
+          "balance": {
+            "gte": 20000,
+            "lte": 30000
+          }
+        }
+      }
+    }
+  }
+}
+
+-- agregation
+
+
+GET /bank/_search
+{
+  "size": 0,
+  "aggs": {
+    "group_by_age": {
+      "range": {
+        "field": "age",
+        "ranges": [
+          {
+            "from": 20,
+            "to": 30
+          },
+          {
+            "from": 30,
+            "to": 40
+          },
+          {
+            "from": 40,
+            "to": 50
+          }
+        ]
+      },
+      "aggs": {
+        "group_by_gender": {
+          "terms": {
+            "field": "gender.keyword"
+          },
+          "aggs": {
+            "average_balance": {
+              "avg": {
+                "field": "balance"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
