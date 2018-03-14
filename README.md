@@ -15,6 +15,7 @@ Technologies in project:
 - Scala with Akka Actor 
 - Gradle
 - Sbt
+- Cassandra / Scylladb
 
 
 > gradle clean build 

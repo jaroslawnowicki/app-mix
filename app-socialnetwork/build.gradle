@@ -75,6 +75,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-neo4j')
     compile('org.springframework.boot:spring-boot-starter-activemq')
     compile('org.springframework.boot:spring-boot-starter-aop')
+    compile('org.springframework.boot:spring-boot-starter-data-cassandra')
     compile("org.springframework.cloud:spring-cloud-core")
     compile('org.springframework.cloud:spring-cloud-stream')
     compile('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
