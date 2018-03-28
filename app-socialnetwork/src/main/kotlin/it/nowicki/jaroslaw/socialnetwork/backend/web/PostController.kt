@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*
  */
 @RestController
 @RequestMapping("/post")
-open class PostController(val postService: PostService, val userInfo: UserInfo) {
+class PostController(val postService: PostService, val userInfo: UserInfo) {
 
     @PostMapping("")
 //	@ApiOperation(value = "doc header...", notes = "detailed doc...")

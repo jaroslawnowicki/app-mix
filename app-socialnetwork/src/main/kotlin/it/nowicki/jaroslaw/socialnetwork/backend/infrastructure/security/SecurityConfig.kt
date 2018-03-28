@@ -39,9 +39,9 @@ class SpringSecurityConfig : KeycloakWebSecurityConfigurerAdapter() {
                         "/swagger-ui.html",
                         "/webjars/**",
                         "/swagger-resources/configuration/ui",
-                        "/swagge‌​r-ui.html",
-                        "/swagger-resources/configuration/security").permitAll()
-                .antMatchers("/*").hasRole("user")
+                        "/swagger-resources/configuration/security",
+                        "/test").permitAll()
+                .antMatchers("/x*").hasRole("user")
                 .anyRequest().authenticated();
 //                .hasRole("R_USER")
 //                .anyRequest()

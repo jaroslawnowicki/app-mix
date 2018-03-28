@@ -7,6 +7,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("it.nowicki.jaroslaw.socialnetwork")
-@EnableNeo4jRepositories("it.nowicki.jaroslaw.socialnetwork")
+@ComponentScan("it.nowicki.jaroslaw.socialnetwork.backend.infrastructure.neo4j")
+@EnableNeo4jRepositories("it.nowicki.jaroslaw.socialnetwork.backend.infrastructure.neo4j")
 class Neo4jConfig

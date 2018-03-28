@@ -5,10 +5,10 @@ spring:
       password: password
       uri: http://localhost:7474
     cassandra:
-      keyspace-name: socialnetwork_namespace
+      keyspace-name: cover_type
       contact-points: localhost
       port: 9042
-      schema-action: create_if_not_exists
+      schema-action: recreate
 
   rabbitmq:
     host: 127.0.0.1

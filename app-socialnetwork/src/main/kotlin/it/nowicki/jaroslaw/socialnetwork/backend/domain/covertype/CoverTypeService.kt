@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class CoverTypeService @Autowired constructor(private val coverTypeService: CoverTypeService) {
+class CoverTypeService {
+
+    @Autowired
+    lateinit var coverTypeRepository: CoverTypeRepository
 
     fun save(coverType: CoverType) {
-        coverTypeService.save(coverType)
+        coverTypeRepository.save(coverType)
     }
 }

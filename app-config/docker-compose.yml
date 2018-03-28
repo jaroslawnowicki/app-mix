@@ -115,10 +115,10 @@ services:
     image: scylladb/scylla
     container_name: scylladb-1
     ports:
-      - 7000
-      - "10000:10000"
-      - "9161:9160"
-      - "9042:9042"
+      - 7000:7000
+      - 10000:10000
+      - 9161:9160
+      - 9042:9042
     volumes:
       - $PWD/docker/scylladb/1:/var/lib/scylla"
     restart: always
