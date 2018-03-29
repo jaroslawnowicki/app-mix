@@ -24,7 +24,7 @@ class TestController @Autowired constructor(val coverTypeService: CoverTypeServi
         return OkResponse()
     }
 
-    @GetMapping("/uuid/{id:[a-z0-9-]*}")
+    @GetMapping("/uuid/{id:[a-fA-F0-9-]*}")
     fun testId(@PathVariable("id") id: String): OkResponse {
 
         println("id " + id)
