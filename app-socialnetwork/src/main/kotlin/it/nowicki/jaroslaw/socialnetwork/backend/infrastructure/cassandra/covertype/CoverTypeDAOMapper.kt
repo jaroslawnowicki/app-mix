@@ -9,7 +9,9 @@ class CoverTypeDAOMapper {
 
     fun mapToDTO(coverType: CoverType): CoverTypeDTO {
         val coverTypeDTO = CoverTypeDTO()
-        coverTypeDTO.id = UUIDs.timeBased()
+        val uuid = UUIDs.timeBased()
+        println(uuid)
+        coverTypeDTO.id = uuid
         coverTypeDTO.documentId = coverType.id
         coverTypeDTO.num1 = coverType.num1
         coverTypeDTO.num2 = coverType.num1.toString()

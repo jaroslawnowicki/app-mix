@@ -7,7 +7,7 @@ class CassandraConfiguration : AbstractCassandraConfiguration() {
 
     override fun getStartupScripts(): List<String> {
 
-        val script = ("CREATE KEYSPACE IF NOT EXISTS cover_type "
+        val script = ("CREATE KEYSPACE IF NOT EXISTS cover_typee "
                 + "WITH durable_writes = true "
                 + "AND replication = { 'replication_factor' : 1, 'class' : 'SimpleStrategy' };")
 
@@ -15,7 +15,7 @@ class CassandraConfiguration : AbstractCassandraConfiguration() {
     }
 
     override fun getShutdownScripts(): List<String> {
-        return arrayListOf("DROP KEYSPACE cover_type;")
+        return arrayListOf("DROP KEYSPACE cover_typee;")
     }
 
 

@@ -5,12 +5,12 @@ import it.nowicki.jaroslaw.socialnetwork.backend.domain.covertype.CoverTypeServi
 import it.nowicki.jaroslaw.socialnetwork.backend.domain.response.OkResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.util.*
 
-/**
- * Created by jarek on 28.03.18.
- */
+
 @RestController
 @RequestMapping("/test")
 class TestController @Autowired constructor(val coverTypeService: CoverTypeService) {
@@ -18,10 +18,20 @@ class TestController @Autowired constructor(val coverTypeService: CoverTypeServi
     @GetMapping("/test")
     fun test(): OkResponse {
 
-        println("dziala")
         val c = CoverType(1, 1)
         coverTypeService.save(c)
 
         return OkResponse()
     }
+
+    @GetMapping("/uuid/{id:[a-z0-9-]*}")
+    fun testId(@PathVariable("id") id: String): OkResponse {
+
+        println("id " + id)
+        val uuid = UUID.fromString(id)
+        println("uuid" + uuid)
+        println(coverTypeService.findOne(uuid))
+        return OkResponse()
+    }
+
 }

@@ -1,6 +1,5 @@
 package it.nowicki.jaroslaw.socialnetwork.backend.infrastructure.cassandra.config
 
-import org.springframework.cassandra.config.DataCenterReplication
 import org.springframework.cassandra.config.java.AbstractClusterConfiguration
 import org.springframework.cassandra.core.keyspace.CreateKeyspaceSpecification
 import org.springframework.cassandra.core.keyspace.DropKeyspaceSpecification
@@ -9,13 +8,13 @@ import org.springframework.cassandra.core.keyspace.KeyspaceOption
 
 abstract class AbstractCassandraConfiguration : AbstractClusterConfiguration() {
 
-    private val socialNetworkNamespace: String = "cover_type"
+    private val socialNetworkNamespace: String = "cover_typee"
 
     override fun getKeyspaceCreations(): List<CreateKeyspaceSpecification> {
 
         val specification = CreateKeyspaceSpecification.createKeyspace(socialNetworkNamespace)
                 .with(KeyspaceOption.DURABLE_WRITES, true)
-                .withNetworkReplication(DataCenterReplication.dcr("rep1", 1))
+//                .withNetworkReplication(DataCenterReplication.dcr("rep1", 1))
 
         return arrayListOf(specification)
     }
